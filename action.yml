@@ -1,0 +1,19 @@
+name: Extract target (X) from deploy (/deploy X) command
+description: Some automation
+outputs:
+  target:
+    description: Target
+    value: ${{ steps.target.outputs.target }}
+runs:
+  using: "composite"
+  steps:
+  - name: Resolve deploy target
+    uses: actions/github-script@v6
+    id: target
+    with:
+      script: |
+        var match = context.payload.comment.body.match(/\/deploy ([a-z0-9]+)/);
+        if (!match) {
+          core.error('Deploy command not found');
+        }
+        core.setOutput('target', match[1]);
