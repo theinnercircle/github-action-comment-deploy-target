@@ -1,4 +1,4 @@
-name: Extract target (X) from deploy (/deploy X) command
+name: Extract target (X) from deploy (/deploy X) command in pull request or issue comment
 description: Some automation
 outputs:
   target:
